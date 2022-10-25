@@ -1,0 +1,13 @@
+consult agent -dev => Sobe o consul em dev
+
+consul members => lista os membros do cluster que subiram com o comando consul agent -dev
+
+curl localhost:8500/v1/catalog/nodes => ve os nodes que temos
+
+apk -U add bind-tools => instala o dig no linux alpine. O dig serve para trabalhar com DNS
+
+dig => Faz consultas no servidor DNS
+dig @localhost -p 8600 => faz uma consulta no servidor
+dig @localhost -p 8600 consul01.node.consul => lista dados do DNS
+dig @localhost -p 8600 consul01.node.consul +short => Exibe somente o IP do DNS
+
