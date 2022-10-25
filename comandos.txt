@@ -11,3 +11,16 @@ dig @localhost -p 8600 => faz uma consulta no servidor
 dig @localhost -p 8600 consul01.node.consul => lista dados do DNS
 dig @localhost -p 8600 consul01.node.consul +short => Exibe somente o IP do DNS
 
+ifconfig => igual ao ipconfig do windows, descobre o ip da rede
+
+consul agent -server -bootstrap-expect=3 -node=consulserver01 -bind=172.19.0.3 -data-dir=/var/lib/consul -config-dir=/etc/consul.d => 
+  * sobe o consul como server
+  * indica para ele experar mais 3 servers
+  * dou o nome do node
+  * falo qual o ip do server (retirado do ifconfig)
+  * falo onde ele deve armazenar as informações (observação: O diretorio tem que estar criado)
+  * falo onde fica os arquivos de configuração (observação: O diretorio tem que estar criado)
+
+Apos subir os servers, é necessário dar um join para que eles se conheçam.
+
+consul join <ip> => consul join 172.19.0.4
