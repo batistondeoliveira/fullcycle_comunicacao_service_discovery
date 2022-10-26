@@ -73,3 +73,16 @@ Escreva Hello
 * o server01 vai cair se estiver de pé
 * entre no server01 novamente, docker exec -it consulserver01 sh
 * consul agent -config-dir=/etc/consul.d
+
+=== Trabalhando com criptografia ===
+* Member ship
+* Mutuo TLS, gera um certificado e gera os certificados do client 
+
+Vamos fazer apenas o member ship
+* consul keygen
+* pega o resultado e coloca na chave encrypt de cada server.json
+* rm -rf /tmp/* => para limpar qq arquivo antigos
+
+Depois de tudo, podemos ver as mensagens que estão sendo passadas com o comando abaixo:
+tcpdump -i eth0 -an port 8301 -A
+
