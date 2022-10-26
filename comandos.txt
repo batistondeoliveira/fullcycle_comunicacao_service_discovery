@@ -50,3 +50,19 @@ Agora, se executarmos o comando
 dig @localhost -p 8600 nginx.service.consul
 
 Veremos que temos 2 ips (maquinas) com o mesmo serviço nginx
+
+=== health check ===
+* Faz a configuração no services.json do consul01
+* Executa o consul reload
+* instala o nginx
+apk add nginx
+* mkdir /run/nginx
+* nginx
+* ps => para verificar se o nginx tá no ar
+* mkdir /usr/share/nginx/html -p => cria o diretorio, -p ele faz recursivo
+* apk add vim
+* vim /etc/nginx/conf.d/default.conf ou /etc/nginx/http.d/default.conf 
+Edite o arquivo em cima, apaga a parte do 404 e coloque no lugar root /usr/share/nginx/html;
+* vim /usr/share/nginx/html/index.html
+Escreva Hello
+* reinicie o nginx => nginx -s reload
