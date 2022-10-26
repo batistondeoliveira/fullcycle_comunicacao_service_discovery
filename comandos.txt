@@ -13,8 +13,7 @@ dig @localhost -p 8600 consul01.node.consul +short => Exibe somente o IP do DNS
 
 ifconfig => igual ao ipconfig do windows, descobre o ip da rede
 
-=== Sobe server
-
+=== Sobe server ===
 consul agent -server -bootstrap-expect=3 -node=consulserver01 -bind=172.19.0.3 -data-dir=/var/lib/consul -config-dir=/etc/consul.d => 
   * sobe o consul como server
   * indica para ele experar mais 3 servers
@@ -27,5 +26,19 @@ Apos subir os servers, é necessário dar um join para que eles se conheçam.
 
 consul join <ip> => consul join 172.19.0.4
 
-=== Sobe client
+=== Sobe client ==
 consul agent -bind=172.19.0.5 -data-dir=/var/lib/consul -config-dir=/etc/consul.d => 
+
+=== Registrar um serviço ===
+Cria o arquivo services.json (o nome pode ser qq um)
+
+Executar: 
+consult reload => faz com que o consul atualize os servicos
+
+Depois disso, se executar o comando
+dig @localhost -p 8600 nginx.service.consul ou
+dig @localhost -p 8600 web.nginx.service.consul => Pode executar em qq maquina que vai encontrar
+curl localhost:8500/v1/catalog/services => busca no catalogo de servicos e vai exibir os serviços registrados 
+consul catalog nodes -service nginx => Vai trazer em qual node (client/ip) o serviço do nginx está registrado
+consul catalog nodes -detailed => traz todos os nodes registrados
+Mais consultas, ver na documentação.
