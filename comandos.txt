@@ -42,3 +42,11 @@ curl localhost:8500/v1/catalog/services => busca no catalogo de servicos e vai e
 consul catalog nodes -service nginx => Vai trazer em qual node (client/ip) o serviço do nginx está registrado
 consul catalog nodes -detailed => traz todos os nodes registrados
 Mais consultas, ver na documentação.
+
+=== Sob client ===
+consul agent -bind=172.19.0.5 -data-dir=/var/lib/consul -config-dir=/etc/consul.d -retry-join=172.19.0.3 => Sobe o client já registrado no server
+
+Agora, se executarmos o comando
+dig @localhost -p 8600 nginx.service.consul
+
+Veremos que temos 2 ips (maquinas) com o mesmo serviço nginx
