@@ -66,3 +66,10 @@ Edite o arquivo em cima, apaga a parte do 404 e coloque no lugar root /usr/share
 * vim /usr/share/nginx/html/index.html
 Escreva Hello
 * reinicie o nginx => nginx -s reload
+
+=== Sincronizando servers via arquivo ===
+* cria o arquivo server.json em servers/server01 (o nome do diretorio tanto faz)
+* executa o docker-compose up -d novamente
+* o server01 vai cair se estiver de pé
+* entre no server01 novamente, docker exec -it consulserver01 sh
+* consul agent -config-dir=/etc/consul.d
