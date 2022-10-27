@@ -86,3 +86,25 @@ Vamos fazer apenas o member ship
 Depois de tudo, podemos ver as mensagens que estão sendo passadas com o comando abaixo:
 tcpdump -i eth0 -an port 8301 -A
 
+=== User Interface ===
+* Quando for subir o agent consul, basta colocar o comando -ui conforme exemplo abaixo:
+consul agent -config-dir=/etc/consul.d -ui
+Porem para externalizar isso no docker, teria que colocar mais um comando que seria -client_addr, porem ele não fez isso e colocou no arquivo de configuração
+* então, ele configurou o arquivo json do server01 e adicionou no docker-compose a exposição da porta 8500
+* feito isso, basta subir o agent normalmente e acessar http://localhost:8500/ui/
+
+Outros recursos a ser explorado ===
+* Key/Value Store => Local onde guardo todas as minhas variaveis de ambiente, então quando minha aplicação subir, ele vai lá e consulta as variaveis
+* Intentions => O consul trabalha como service smash e vc consegue falar quanl serviço vai acessar qual serviço
+* Access Controls => Conseguimos criar policies, conseguimos criar ACL (Access Control List) falando qual recurso de quais serviços você pode ver.
+Por exemplo:
+Posso gravar no serviço mysql mas no serviço redis eu posso apenas ler
+Para isso, você tem que gerar tokens, criar policies
+
+Dicas para produção ===
+* Trabalhar com chave de criptografia
+* Trabalhar com TLS para comunicação (criar certificado e tudo mais)
+
+Minimo === 
+* Criar 3 services, tudo rodando com TLS, tudo rodando com encrypt keygen
+* Subir os serviços fazendo auto join
